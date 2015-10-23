@@ -8,7 +8,7 @@ package net.adamjak.thomas.fractions;
  *
  * @author Tomas Adamjak <thomas@adamjak.net>
  */
-public class Fraction extends Number implements Comparable<Fraction>
+public class Fraction extends Number implements Comparable<Fraction>, Cloneable
 {
 	private final Integer numerator;
 	private final Integer denominator;
@@ -45,6 +45,17 @@ public class Fraction extends Number implements Comparable<Fraction>
 	// Fabric method
 	// -------------------------------------------------------------------------
 	
+	/**
+	 * createFraction - creating fraction from numerator and denominator
+	 * 
+	 * @param numerator (Integer)
+	 * @param denominator (Integer)
+	 * 
+	 * @return (Fraction) 
+	 * 
+	 * @throws IllegalArgumentException when numerator or denominator is null
+	 * @throws ArithmeticException when denominator is zero
+	 */
 	public static Fraction createFraction (Integer numerator, Integer denominator)
 	{		
 		if(numerator == null) throw new IllegalArgumentException(Fraction.ERR_NULL_NUMERATOR);
@@ -351,6 +362,14 @@ public class Fraction extends Number implements Comparable<Fraction>
 	{
 		return this.numerator + "/" + this.denominator;
 	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException
+	{
+		return new Fraction(new Integer(this.numerator.intValue()), new Integer(this.denominator.intValue()));
+	}
+	
+	
 	
 	// -------------------------------------------------------------------------
 	// Private method

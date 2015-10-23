@@ -20,12 +20,45 @@ public class FractionTest
 	public void testCreateFraction_Integer_Integer()
 	{
 		Integer numerator = 4;
-		Integer detominator = 6;
+		Integer denominator = 6;
 		Integer expResultNumerator = 2;
-		Integer expResultDetominator = 3;
-		Fraction result = Fraction.createFraction(numerator, detominator);
+		Integer expResultDenominator = 3;
+		Fraction result = Fraction.createFraction(numerator, denominator);
 		assertEquals(expResultNumerator, result.getNumerator());
-		assertEquals(expResultDetominator, result.getDenominator());
+		assertEquals(expResultDenominator, result.getDenominator());
+	}
+	
+	/**
+	 * Test of createFraction method, of class Fraction. IllegalArgumentException test
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCreateFraction_Integer_Integer_IllegalArgumentException_Numerator()
+	{
+		Integer numerator = null;
+		Integer denominator = 6;
+		Fraction.createFraction(numerator, denominator);
+	}
+	
+	/**
+	 * Test of createFraction method, of class Fraction. IllegalArgumentException test
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCreateFraction_Integer_Integer_IllegalArgumentException_Denominator()
+	{
+		Integer numerator = 4;
+		Integer denominator = null;
+		Fraction.createFraction(numerator, denominator);
+	}
+	
+	/**
+	 * Test of createFraction method, of class Fraction. IllegalArgumentException test
+	 */
+	@Test(expected = ArithmeticException.class)
+	public void testCreateFraction_Integer_Integer_ArithmeticException()
+	{
+		Integer numerator = 4;
+		Integer denominator = 0;
+		Fraction.createFraction(numerator, denominator);
 	}
 
 	/**
@@ -36,10 +69,20 @@ public class FractionTest
 	{
 		Integer numerator = 3;
 		Integer expResultNumerator = 3;
-		Integer expResultDetominator = 1;
+		Integer expResultDenominator = 1;
 		Fraction result = Fraction.createFraction(numerator);
 		assertEquals(expResultNumerator, result.getNumerator());
-		assertEquals(expResultDetominator, result.getDenominator());
+		assertEquals(expResultDenominator, result.getDenominator());
+	}
+	
+	/**
+	 * Test of createFraction method, of class Fraction. IllegalArgumentException test
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCreateFraction_Integer_IllegalArgumentException_Numerator()
+	{
+		Integer numerator = null;
+		Fraction.createFraction(numerator);
 	}
 
 	/**
@@ -49,12 +92,12 @@ public class FractionTest
 	public void testCreateFraction_Long_Long()
 	{
 		Long numerator = 4L;
-		Long detominator = 6L;
+		Long denominator = 6L;
 		Integer expResultNumerator = 2;
-		Integer expResultDetominator = 3;
-		Fraction result = Fraction.createFraction(numerator, detominator);
+		Integer expResultDenominator = 3;
+		Fraction result = Fraction.createFraction(numerator, denominator);
 		assertEquals(expResultNumerator, result.getNumerator());
-		assertEquals(expResultDetominator, result.getDenominator());
+		assertEquals(expResultDenominator, result.getDenominator());
 	}
 
 	/**
@@ -65,10 +108,10 @@ public class FractionTest
 	{
 		Long numerator = 3L;
 		Integer expResultNumerator = 3;
-		Integer expResultDetominator = 1;
+		Integer expResultDenominator = 1;
 		Fraction result = Fraction.createFraction(numerator);
 		assertEquals(expResultNumerator, result.getNumerator());
-		assertEquals(expResultDetominator, result.getDenominator());
+		assertEquals(expResultDenominator, result.getDenominator());
 	}
 
 	/**
@@ -79,10 +122,10 @@ public class FractionTest
 	{
 		Fraction fraction = Fraction.createFraction(4, 6);
 		Integer expResultNumerator = 2;
-		Integer expResultDetominator = 3;
+		Integer expResultDenominator = 3;
 		Fraction result = Fraction.createFraction(fraction);
 		assertEquals(expResultNumerator, result.getNumerator());
-		assertEquals(expResultDetominator, result.getDenominator());
+		assertEquals(expResultDenominator, result.getDenominator());
 	}
 
 	/**
@@ -93,10 +136,10 @@ public class FractionTest
 	{
 		Double d = 0.75;
 		Integer expResultNumerator = 3;
-		Integer expResultDetominator = 4;
+		Integer expResultDenominator = 4;
 		Fraction result = Fraction.createFraction(d);
 		assertEquals(expResultNumerator, result.getNumerator());
-		assertEquals(expResultDetominator, result.getDenominator());
+		assertEquals(expResultDenominator, result.getDenominator());
 	}
 
 	/**
@@ -371,7 +414,7 @@ public class FractionTest
 	 * Test of getDenominator method, of class Fraction.
 	 */
 	@Test
-	public void testGetDetominator()
+	public void testGetDenominator()
 	{
 		Fraction instance = Fraction.createFraction(4, 6);
 		Integer expResult = 3;
@@ -483,10 +526,10 @@ public class FractionTest
 	public void testHashCode()
 	{
 		Integer numerator = 2;
-		Integer detominator = 3;
+		Integer denominator = 3;
 		
-		Fraction instance = Fraction.createFraction(numerator, detominator);
-		int expResult = (13 + numerator.hashCode()) * 13 + detominator.hashCode();
+		Fraction instance = Fraction.createFraction(numerator, denominator);
+		int expResult = (13 + numerator.hashCode()) * 13 + denominator.hashCode();
 		int result = instance.hashCode();
 		assertEquals(expResult, result);
 	}
