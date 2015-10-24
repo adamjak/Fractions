@@ -4,6 +4,7 @@
  */
 package net.adamjak.thomas.fractions;
 
+import java.text.ParseException;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -31,8 +32,8 @@ public class FractionTest
 	/**
 	 * Test of createFraction method, of class Fraction. IllegalArgumentException test
 	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testCreateFraction_Integer_Integer_IllegalArgumentException_Numerator()
+	@Test(expected = NullPointerException.class)
+	public void testCreateFraction_Integer_Integer_NullPointerException_Numerator()
 	{
 		Integer numerator = null;
 		Integer denominator = 6;
@@ -42,8 +43,8 @@ public class FractionTest
 	/**
 	 * Test of createFraction method, of class Fraction. IllegalArgumentException test
 	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testCreateFraction_Integer_Integer_IllegalArgumentException_Denominator()
+	@Test(expected = NullPointerException.class)
+	public void testCreateFraction_Integer_Integer_NullPointerException_Denominator()
 	{
 		Integer numerator = 4;
 		Integer denominator = null;
@@ -78,8 +79,8 @@ public class FractionTest
 	/**
 	 * Test of createFraction method, of class Fraction. IllegalArgumentException test
 	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testCreateFraction_Integer_IllegalArgumentException_Numerator()
+	@Test(expected = NullPointerException.class)
+	public void testCreateFraction_Integer_NullPointerException_Numerator()
 	{
 		Integer numerator = null;
 		Fraction.createFraction(numerator);
@@ -99,6 +100,28 @@ public class FractionTest
 		assertEquals(expResultNumerator, result.getNumerator());
 		assertEquals(expResultDenominator, result.getDenominator());
 	}
+	
+	/**
+	 * Test of createFraction method, of class Fraction. IllegalArgumentException test
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testCreateFraction_Long_Long_NullPointerException_Numerator()
+	{
+		Long numerator = null;
+		Long denominator = 6L;
+		Fraction.createFraction(numerator, denominator);
+	}
+	
+	/**
+	 * Test of createFraction method, of class Fraction. IllegalArgumentException test
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testCreateFraction_Long_Long_NullPointerException_Denominator()
+	{
+		Long numerator = 4L;
+		Long denominator = null;
+		Fraction.createFraction(numerator, denominator);
+	}
 
 	/**
 	 * Test of createFraction method, of class Fraction.
@@ -112,6 +135,16 @@ public class FractionTest
 		Fraction result = Fraction.createFraction(numerator);
 		assertEquals(expResultNumerator, result.getNumerator());
 		assertEquals(expResultDenominator, result.getDenominator());
+	}
+	
+	/**
+	 * Test of createFraction method, of class Fraction. IllegalArgumentException test
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testCreateFraction_Long_NullPointerException_Numerator()
+	{
+		Long numerator = null;
+		Fraction.createFraction(numerator);
 	}
 
 	/**
@@ -127,6 +160,16 @@ public class FractionTest
 		assertEquals(expResultNumerator, result.getNumerator());
 		assertEquals(expResultDenominator, result.getDenominator());
 	}
+	
+	/**
+	 * Test of createFraction method, of class Fraction. IllegalArgumentException test
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testCreateFraction_Fraction_NullPointerException()
+	{
+		Fraction fraction = null;
+		Fraction.createFraction(fraction);
+	}
 
 	/**
 	 * Test of createFraction method, of class Fraction.
@@ -140,6 +183,36 @@ public class FractionTest
 		Fraction result = Fraction.createFraction(d);
 		assertEquals(expResultNumerator, result.getNumerator());
 		assertEquals(expResultDenominator, result.getDenominator());
+	}
+	
+	/**
+	 * Test of createFraction method, of class Fraction. IllegalArgumentException test
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testCreateFraction_Double_NullPointerException()
+	{
+		Double d = null;
+		Fraction.createFraction(d);
+	}
+	
+	/**
+	 * Test of createFraction method, of class Fraction. IllegalArgumentException test
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCreateFraction_Double_IllegalArgumentException_Nan()
+	{
+		Double d = Double.NaN;
+		Fraction.createFraction(d);
+	}
+	
+	/**
+	 * Test of createFraction method, of class Fraction. IllegalArgumentException test
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCreateFraction_Double_IllegalArgumentException_Infinite()
+	{
+		Double d = Double.POSITIVE_INFINITY;
+		Fraction.createFraction(d);
 	}
 
 	/**
@@ -420,6 +493,109 @@ public class FractionTest
 		Integer expResult = 3;
 		Integer result = instance.getDenominator();
 		assertEquals(expResult, result);
+	}
+	
+	/**
+	 * Test of tryParse method, of class Fraction.
+	 */
+	@Test
+	public void testTryParse_String_Mixed_Fraction() throws ParseException
+	{
+		String s = "1/2/3";
+		Fraction expResult = Fraction.createFraction(5, 3);
+		Fraction result = Fraction.tryParse(s);
+		assertEquals(expResult, result);
+	}
+	
+	/**
+	 * Test of tryParse method, of class Fraction.
+	 */
+	@Test
+	public void testTryParse_String_Fraction() throws ParseException
+	{
+		String s = "2/3";
+		Fraction expResult = Fraction.createFraction(2, 3);
+		Fraction result = Fraction.tryParse(s);
+		assertEquals(expResult, result);
+	}
+	
+	/**
+	 * Test of tryParse method, of class Fraction.
+	 */
+	@Test
+	public void testTryParse_String_Number() throws ParseException
+	{
+		String s = "3";
+		Fraction expResult = Fraction.createFraction(3);
+		Fraction result = Fraction.tryParse(s);
+		assertEquals(expResult, result);
+	}
+	
+	/**
+	 * Test of tryParse method, of class Fraction.
+	 */
+	@Test
+	public void testTryParse_String_Character() throws ParseException
+	{
+		String s = "1:2:3";
+		Fraction expResult = Fraction.createFraction(5, 3);
+		Fraction result = Fraction.tryParse(s,':');
+		assertEquals(expResult, result);
+	}
+	
+	/**
+	 * Test of exception in tryParse method, of class Fraction.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testTryParse_String_Character_IllegalArgumentException_String_Null() throws ParseException
+	{
+		String s = null;
+		Character c = '/';
+		Fraction.tryParse(s,c);
+	}
+	
+	/**
+	 * Test of exception in tryParse method, of class Fraction.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testTryParse_String_Character_IllegalArgumentException_String_Empty() throws ParseException
+	{
+		String s = "";
+		Character c = '/';
+		Fraction.tryParse(s,c);
+	}
+	
+	/**
+	 * Test of exception in tryParse method, of class Fraction.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testTryParse_String_Character_IllegalArgumentException_Character_Null() throws ParseException
+	{
+		String s = "1/2";
+		Character c = null;
+		Fraction.tryParse(s,c);
+	}
+	
+	/**
+	 * Test of exception in tryParse method, of class Fraction.
+	 */
+	@Test(expected = ParseException.class)
+	public void testTryParse_String_Character_ParseException_Too_Many_Separators() throws ParseException
+	{
+		String s = "1/2/3/4";
+		Character c = '/';
+		Fraction.tryParse(s,c);
+	}
+	
+	/**
+	 * Test of exception in tryParse method, of class Fraction.
+	 */
+	@Test(expected = ParseException.class)
+	public void testTryParse_String_Character_ParseException_Wrong_Separator() throws ParseException
+	{
+		String s = "1:2";
+		Character c = '/';
+		Fraction.tryParse(s,c);
 	}
 
 	/**

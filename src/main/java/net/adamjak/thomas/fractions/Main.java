@@ -4,13 +4,15 @@
  */
 package net.adamjak.thomas.fractions;
 
+import java.text.ParseException;
+
 /**
  *
  * @author Tomas Adamjak <thomas@adamjak.net>
  */
 public class Main
 {
-	public static void main (String args[]) throws CloneNotSupportedException
+	public static void main (String args[]) throws CloneNotSupportedException, ParseException
 	{
 		Fraction f1 = Fraction.createFraction(2, 3);
 		Fraction f2 = Fraction.createFraction(4L, 5L);
@@ -31,5 +33,7 @@ public class Main
 		System.out.println("Random: " + Fraction.random());
 		
 		System.out.println("Clone: " + f1.clone());
+		
+		System.out.println("Parse: " + Fraction.tryParse("1/2",'/'));
 	}
 }

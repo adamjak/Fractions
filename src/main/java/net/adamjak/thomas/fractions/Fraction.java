@@ -4,11 +4,13 @@
  */
 package net.adamjak.thomas.fractions;
 
+import java.io.Serializable;
+import java.text.ParseException;
+
 /**
- *
  * @author Tomas Adamjak <thomas@adamjak.net>
  */
-public class Fraction extends Number implements Comparable<Fraction>, Cloneable
+public class Fraction extends Number implements Comparable<Fraction>, Cloneable, Serializable
 {
 	private final Integer numerator;
 	private final Integer denominator;
@@ -53,13 +55,13 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable
 	 * 
 	 * @return (Fraction) 
 	 * 
-	 * @throws IllegalArgumentException when numerator or denominator is null
+	 * @throws NullPointerException when numerator or denominator is null
 	 * @throws ArithmeticException when denominator is zero
 	 */
 	public static Fraction createFraction (Integer numerator, Integer denominator)
 	{		
-		if(numerator == null) throw new IllegalArgumentException(Fraction.ERR_NULL_NUMERATOR);
-		if(denominator == null) throw new IllegalArgumentException(Fraction.ERR_NULL_DENOMINATOR);
+		if(numerator == null) throw new NullPointerException(Fraction.ERR_NULL_NUMERATOR);
+		if(denominator == null) throw new NullPointerException(Fraction.ERR_NULL_DENOMINATOR);
 		if(denominator.equals(Fraction.ZERO)) throw new ArithmeticException(Fraction.ERR_DIVITE_BY_ZERO);
 
 		if(Fraction.signum(denominator) < Fraction.ZERO)
@@ -73,38 +75,90 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable
 		return new Fraction(numerator / gcd, denominator / gcd);
 	}
 	
+	/**
+	 * createFraction - creating fraction from number<br />
+	 * For example from <em>3</em> create 3/1 fraction
+	 * 
+	 * @param numerator (Integer)
+	 * 
+	 * @return (Fraction) 
+	 * 
+	 * @throws NullPointerException when numerator is null
+	 */
 	public static Fraction createFraction (Integer numerator)
 	{
-		if(numerator == null) throw new IllegalArgumentException(Fraction.ERR_NULL_NUMERATOR);
+		if(numerator == null) throw new NullPointerException(Fraction.ERR_NULL_NUMERATOR);
 		
 		return new Fraction(numerator, Fraction.ONE);
 	}
 	
-	public static Fraction createFraction (Long numerator, Long detominator)
+	/**
+	 * createFraction - creating fraction from numerator and denominator
+	 * 
+	 * @param numerator (Long)
+	 * @param denominator (Long)
+	 * 
+	 * @return (Fraction) 
+	 * 
+	 * @throws NullPointerException when numerator or denominator is null
+	 * @throws ArithmeticException when denominator is zero
+	 */
+	public static Fraction createFraction (Long numerator, Long denominator)
 	{
-		if(numerator == null) throw new IllegalArgumentException(Fraction.ERR_NULL_NUMERATOR);
-		if(detominator == null) throw new IllegalArgumentException(Fraction.ERR_NULL_DENOMINATOR);
+		if(numerator == null) throw new NullPointerException(Fraction.ERR_NULL_NUMERATOR);
+		if(denominator == null) throw new NullPointerException(Fraction.ERR_NULL_DENOMINATOR);
 		
-		return Fraction.createFraction(numerator.intValue(), detominator.intValue());
+		return Fraction.createFraction(numerator.intValue(), denominator.intValue());
 	}
 	
+	/**
+	 * createFraction - creating fraction from number<br />
+	 * For example from <em>3</em> create 3/1 fraction
+	 * 
+	 * @param numerator (Long)
+	 * 
+	 * @return (Fraction) 
+	 * 
+	 * @throws NullPointerException when numerator is null
+	 */
 	public static Fraction createFraction (Long numerator)
 	{
-		if(numerator == null) throw new IllegalArgumentException(Fraction.ERR_NULL_NUMERATOR);
+		if(numerator == null) throw new NullPointerException(Fraction.ERR_NULL_NUMERATOR);
 		
 		return new Fraction(numerator.intValue(), Fraction.ONE);
 	}
 	
+	/**
+	 * createFraction - creating fraction from other fraction
+	 * 
+	 * @param fraction (Fraction)
+	 * 
+	 * @return (Fraction) 
+	 * 
+	 * @throws NullPointerException when fraction is null
+	 */
 	public static Fraction createFraction (Fraction fraction)
 	{
-		if(fraction == null) throw new IllegalArgumentException(Fraction.ERR_NULL_FRACTION);
+		if(fraction == null) throw new NullPointerException(Fraction.ERR_NULL_FRACTION);
 		
-		return new Fraction(fraction.getNumerator(), fraction.getDenominator());
+		return new Fraction(fraction.getNumerator().intValue(), fraction.getDenominator().intValue());
 	}
 	
+	/**
+	 * createFraction - creating fraction from double number<br />
+	 * For example from <em>3.2</em> create 16/5 fraction
+	 * 
+	 * @param d (Double)
+	 * 
+	 * @return (Fraction) 
+	 * 
+	 * @throws NullPointerException when <em>d</em> is null
+	 * @throws IllegalArgumentException if <em>d</em> is infinite
+	 * @throws IllegalArgumentException if <em>d</em> is NaN
+	 */
 	public static Fraction createFraction (Double d)
 	{
-		if(d == null) throw new IllegalArgumentException(Fraction.ERR_NUMBER_EMPTY);
+		if(d == null) throw new NullPointerException(Fraction.ERR_NUMBER_EMPTY);
 		if(d.isInfinite()) throw new IllegalArgumentException(Fraction.ERR_NUMBER_INFINITE);
 		if(d.isNaN()) throw new IllegalArgumentException(Fraction.ERR_NUMBER_NAN);
 
@@ -125,21 +179,22 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable
 		int intValue = d.intValue();
 		long decimalPart = Long.valueOf(d.toString().split("\\.")[1]);
 		int decimalPartLenght = String.valueOf(decimalPart).length();
-		Long tmpDetominator = (long) Math.pow(10, decimalPartLenght);
-		Long tmpNumerator = intValue * tmpDetominator + decimalPart;
+		Long tmpDenominator = (long) Math.pow(10, decimalPartLenght);
+		Long tmpNumerator = intValue * tmpDenominator + decimalPart;
 		
 		if (negative)
 		{
 			tmpNumerator = tmpNumerator * -1;
 		}
 		
-		return Fraction.createFraction(tmpNumerator, tmpDetominator);
+		return Fraction.createFraction(tmpNumerator, tmpDenominator);
 	}
 	
 	// -------------------------------------------------------------------------
 	// Calculate method
 	// -------------------------------------------------------------------------
 	
+	//DOCME
 	public Fraction add(Integer number)
 	{
 		if(number == null) throw new IllegalArgumentException(Fraction.ERR_NUMBER_EMPTY);
@@ -147,6 +202,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable
 		return this.add(Fraction.createFraction(number));
 	}
 	
+	//DOCME
 	public Fraction add (Fraction fraction)
 	{
 		if(fraction == null) throw new IllegalArgumentException(Fraction.ERR_NULL_FRACTION);
@@ -154,6 +210,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable
 		return Fraction.createFraction(this.numerator * fraction.getDenominator() + fraction.getNumerator() * this.denominator, this.denominator * fraction.getDenominator());
 	}
 	
+	//DOCME
 	public Fraction add (Double d)
 	{
 		if(d == null) throw new IllegalArgumentException(Fraction.ERR_NUMBER_EMPTY);
@@ -163,6 +220,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable
 		return this.add(Fraction.createFraction(d));
 	}
 	
+	//DOCME
 	public Fraction multiply (Integer number)
 	{
 		if(number == null) throw new IllegalArgumentException(Fraction.ERR_NUMBER_EMPTY);
@@ -170,6 +228,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable
 		return Fraction.createFraction(number * this.numerator, this.denominator);
 	}
 	
+	//DOCME
 	public Fraction multiply (Fraction fraction)
 	{
 		if(fraction == null) throw new IllegalArgumentException(Fraction.ERR_NULL_FRACTION);
@@ -177,6 +236,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable
 		return Fraction.createFraction(fraction.getNumerator() * this.numerator, fraction.getDenominator() * this.denominator);
 	}
 	
+	//DOCME
 	public Fraction multiply (Double d)
 	{
 		if(d == null) throw new IllegalArgumentException(Fraction.ERR_NUMBER_EMPTY);
@@ -186,6 +246,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable
 		return this.multiply(Fraction.createFraction(d));
 	}
 	
+	//DOCME
 	public Fraction subtract (Integer number)
 	{
 		if(number == null) throw new IllegalArgumentException(Fraction.ERR_NUMBER_EMPTY);
@@ -193,6 +254,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable
 		return this.subtract(Fraction.createFraction(number));
 	}
 	
+	//DOCME
 	public Fraction subtract (Fraction fraction)
 	{
 		if(fraction == null) throw new IllegalArgumentException(Fraction.ERR_NULL_FRACTION);
@@ -200,6 +262,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable
 		return Fraction.createFraction(this.numerator * fraction.getDenominator() - fraction.getNumerator() * this.denominator, this.denominator * fraction.getDenominator());
 	}
 	
+	//DOCME
 	public Fraction subtract (Double d)
 	{
 		if(d == null) throw new IllegalArgumentException(Fraction.ERR_NUMBER_EMPTY);
@@ -209,6 +272,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable
 		return this.subtract(Fraction.createFraction(d));
 	}
 	
+	//DOCME
 	public Fraction divide (Integer number)
 	{
 		if (number == null) throw new IllegalArgumentException(Fraction.ERR_NUMBER_EMPTY);
@@ -217,6 +281,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable
 		return this.divide(Fraction.createFraction(number));
 	}
 	
+	//DOCME
 	public Fraction divide (Fraction fraction)
 	{
 		if (fraction == null) throw new IllegalArgumentException(Fraction.ERR_NULL_FRACTION);
@@ -225,6 +290,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable
 		return Fraction.createFraction(this.numerator * fraction.getDenominator(), this.denominator * fraction.getNumerator());
 	}
 	
+	//DOCME
 	public Fraction divide (Double d)
 	{
 		if (d == null) throw new IllegalArgumentException(Fraction.ERR_NUMBER_EMPTY);
@@ -233,16 +299,19 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable
 		return this.divide(Fraction.createFraction(d));
 	}
 	
+	//DOCME
 	public Fraction max (Fraction fraction)
 	{
 		return this.compareTo(fraction) >= 0 ? this : fraction;
 	}
 	
+	//DOCME
 	public Fraction min (Fraction fraction)
 	{
 		return this.compareTo(fraction) <= 0 ? this : fraction;
 	}
 	
+	//DOCME
 	public Fraction pow (int exponent)
 	{
 		if(exponent == 0)
@@ -263,6 +332,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable
 		}
 	}
 	
+	//DOCME
 	public Fraction reciprocal()
 	{
 		if (this.numerator == 0) throw new ArithmeticException(Fraction.ERR_DIVITE_BY_ZERO);
@@ -270,19 +340,132 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable
 		return Fraction.createFraction(this.denominator, this.numerator);
 	}
 	
+	//DOCME
 	public static Fraction random()
 	{
 		return Fraction.createFraction(Math.random());
 	}
 	
+	//DOCME
 	public Integer getNumerator()
 	{
 		return this.numerator;
 	}
 
+	//DOCME
 	public Integer getDenominator()
 	{
 		return this.denominator;
+	}
+	
+	/**
+	 * tryParse - create Fraction from string and separator.
+	 * <p>
+	 * Supporded formats:<br />
+	 *  - simple number - numerator<br />
+	 *	- classic fraction - numerator[separator]denominator<br />
+	 *  - mixed fraction - number[separator]numerator[separator]denominator
+	 * </p>
+	 * <p>
+	 * For example string <em>1/2/3</em> and separator <em>/</em> create fraction with value 5/3
+	 * </p>
+	 * @param s (String)
+	 * @param separator (Character) 
+	 *
+	 * @return new instance of Fraction
+	 * 
+	 * @throws IllegalArgumentException If string is null or empty
+	 * @throws IllegalArgumentException If separator is null
+	 * @throws ParseException If string haven't correct format
+	 */
+	public static Fraction tryParse (String s, Character separator) throws ParseException
+	{
+		if (s == null || s.isEmpty()) throw new IllegalArgumentException("String can not by empty.");
+		if (separator == null) throw new IllegalArgumentException("Seprator character can not by empty.");
+		
+		int parserCharacterCount = 0;
+		s = s.trim();
+		
+		for (Character c : s.toCharArray())
+		{
+			if (c.equals(separator)) parserCharacterCount++;
+		}
+		
+		if (parserCharacterCount > 2)
+		{
+			throw new ParseException("The seprator characters are located in the string too many times.",s.lastIndexOf(separator.toString()));
+		}
+		
+		if (parserCharacterCount == 0)
+		{
+			Integer numerator;
+			try
+			{
+				numerator = Integer.parseInt(s);
+				return Fraction.createFraction(numerator);
+			}
+			catch (NumberFormatException nfe)
+			{
+				int i = 0;
+				for (Character c : s.toCharArray())
+				{
+					try
+					{
+						Integer.parseInt(c.toString());
+					}
+					catch (NumberFormatException e)
+					{
+						break;
+					}
+					
+					i++;
+				}
+				throw new ParseException("Wrong separator", i);
+			}
+		}
+		
+		String subStrings[] = s.split(separator.toString());
+		
+		Integer numerator, denominator;
+		
+		if (subStrings.length == 3)
+		{
+			Integer number = Integer.parseInt(subStrings[0]);
+			numerator = Integer.parseInt(subStrings[1]);
+			denominator = Integer.parseInt(subStrings[2]);
+			
+			numerator = number * denominator + numerator;
+		}
+		else
+		{
+			numerator = Integer.parseInt(subStrings[0]);
+			denominator = Integer.parseInt(subStrings[1]);
+		}
+		
+		return Fraction.createFraction(numerator, denominator);
+	}
+	
+	/**
+	 * tryParse - create Fraction from string and default '/' separator.
+	 * <p>
+	 * Supporded formats:<br />
+	 *	- classic fraction - numerator/denominator<br />
+	 *  - mixed fraction - number/numerator/denominator
+	 * </p>
+	 * <p>
+	 * For example string <em>1/2/3</em> create fraction with value 5/3
+	 * </p>
+	 * @param s (String)
+	 *
+	 * @return new instance of Fraction
+	 * 
+	 * @throws IllegalArgumentException If string is null or empty
+	 * @throws IllegalArgumentException If separator is null
+	 * @throws ParseException If string haven't correct format
+	 */
+	public static Fraction tryParse (String s) throws ParseException
+	{
+		return Fraction.tryParse(s, '/');
 	}
 	
 	// -------------------------------------------------------------------------
