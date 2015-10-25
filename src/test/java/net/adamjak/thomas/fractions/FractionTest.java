@@ -344,6 +344,28 @@ public class FractionTest
 		Fraction result = instance.divide(number);
 		assertEquals(expResult, result);
 	}
+	
+	/**
+	 * Test of exception in divide method, of class Fraction.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testDivide_Integer_NullPointerException()
+	{
+		Integer nullInt = null;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.divide(nullInt);
+	}
+	
+	/**
+	 * Test of exception in divide method, of class Fraction.
+	 */
+	@Test(expected = ArithmeticException.class)
+	public void testDivide_Integer_ArithmeticException()
+	{
+		Integer zeroInt = 0;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.divide(zeroInt);
+	}
 
 	/**
 	 * Test of divide method, of class Fraction.
@@ -356,6 +378,28 @@ public class FractionTest
 		Fraction expResult = Fraction.createFraction(5, 6);
 		Fraction result = instance.divide(fraction);
 		assertEquals(expResult, result);
+	}
+	
+	/**
+	 * Test of exception in divide method, of class Fraction.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testDivide_Fraction_NullPointerException()
+	{
+		Fraction nullFrac = null;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.divide(nullFrac);
+	}
+	
+	/**
+	 * Test of exception in divide method, of class Fraction.
+	 */
+	@Test(expected = ArithmeticException.class)
+	public void testDivide_Fraction_ArithmeticException()
+	{
+		Fraction zeroFracNum = Fraction.createFraction(0, 2);
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.divide(zeroFracNum);
 	}
 
 	/**
@@ -370,6 +414,50 @@ public class FractionTest
 		Fraction result = instance.divide(d);
 		assertEquals(expResult, result);
 	}
+	
+	/**
+	 * Test of exception in divide method, of class Fraction.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testDivide_Double_NullPointerException()
+	{
+		Double nullDouble = null;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.divide(nullDouble);
+	}
+	
+	/**
+	 * Test of exception in divide method, of class Fraction.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testDivide_Double_IllegalArgumentException_Infinite()
+	{
+		Double infiniteDouble = Double.POSITIVE_INFINITY;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.divide(infiniteDouble);
+	}
+	
+	/**
+	 * Test of exception in divide method, of class Fraction.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testDivide_Double_IllegalArgumentException_Nan()
+	{
+		Double nanDouble = Double.NaN;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.divide(nanDouble);
+	}
+	
+	/**
+	 * Test of exception in divide method, of class Fraction.
+	 */
+	@Test(expected = ArithmeticException.class)
+	public void testDivide_Double_ArithmeticException()
+	{
+		Double zeroDouble = 0.0;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.divide(zeroDouble);
+	}
 
 	/**
 	 * Test of max method, of class Fraction.
@@ -382,6 +470,17 @@ public class FractionTest
 		Fraction expResult = instance;
 		Fraction result = instance.max(f);
 		assertEquals(expResult, result);
+	}
+	
+	/**
+	 * Test of exception in max method of Fraction class.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testMax_NullPointerException()
+	{
+		Fraction nullFrac = null;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.max(nullFrac);
 	}
 
 	/**
@@ -396,6 +495,17 @@ public class FractionTest
 		Fraction result = instance.min(z);
 		assertEquals(expResult, result);
 	}
+	
+	/**
+	 * Test of exception in min method of Fraction class.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testMin_NullPointerException()
+	{
+		Fraction nullFrac = null;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.min(nullFrac);
+	}
 
 	/**
 	 * Test of pow method, of class Fraction when exponent is greater that 1.
@@ -403,7 +513,7 @@ public class FractionTest
 	@Test
 	public void testPowPositive()
 	{
-		int exponent = 3;
+		Integer exponent = 3;
 		Fraction instance = Fraction.createFraction(2, 3);
 		Fraction expResult = Fraction.createFraction(8, 27);
 		Fraction result = instance.pow(exponent);
@@ -416,7 +526,7 @@ public class FractionTest
 	@Test
 	public void testPow1()
 	{
-		int exponent = 1;
+		Integer exponent = 1;
 		Fraction instance = Fraction.createFraction(2, 3);
 		Fraction expResult = Fraction.createFraction(2, 3);
 		Fraction result = instance.pow(exponent);
@@ -429,7 +539,7 @@ public class FractionTest
 	@Test
 	public void testPow0()
 	{
-		int exponent = 0;
+		Integer exponent = 0;
 		Fraction instance = Fraction.createFraction(2, 3);
 		Fraction expResult = Fraction.createFraction(1, 1);
 		Fraction result = instance.pow(exponent);
@@ -442,7 +552,7 @@ public class FractionTest
 	@Test
 	public void testPowNegative()
 	{
-		int exponent = -2;
+		Integer exponent = -2;
 		Fraction instance = Fraction.createFraction(2, 3);
 		Fraction expResult = Fraction.createFraction(9, 4);
 		Fraction result = instance.pow(exponent);
@@ -450,15 +560,33 @@ public class FractionTest
 	}
 	
 	/**
+	 * Test of exception in pow method of Fraction class.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testPow_NullPointerException()
+	{
+		Integer nullInt = null;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.pow(nullInt);
+	}
+	
+	/**
 	 * Test of reciprocal method, of class Fraction.
 	 */
 	@Test
-	public void reciprocal()
+	public void testReciprocal()
 	{
 		Fraction instance = Fraction.createFraction(2, 3);
 		Fraction expResult = Fraction.createFraction(3, 2);
 		Fraction result = instance.reciprocal();
 		assertEquals(expResult, result);
+	}
+	
+	@Test(expected = ArithmeticException.class)
+	public void testReciprocal_ArithmeticException()
+	{
+		Fraction instance = Fraction.createFraction(0, 3);
+		instance.reciprocal();
 	}
 
 	/**

@@ -34,6 +34,8 @@ public class Main
 		
 		System.out.println("Clone: " + f1.clone());
 		
+		System.out.println("Power: " + f1.pow(2));
+		
 		System.out.println("Parse: " + Fraction.tryParse("1/2",'/'));
 	}
 }

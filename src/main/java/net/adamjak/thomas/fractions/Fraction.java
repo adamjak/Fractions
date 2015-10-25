@@ -8,7 +8,11 @@ import java.io.Serializable;
 import java.text.ParseException;
 
 /**
+ * Class which represent a fraction and you can calculate math operations with fractions.
+ * 
  * @author Tomas Adamjak <thomas@adamjak.net>
+ * 
+ * @see http://fractions.thomas.adamjak.net
  */
 public class Fraction extends Number implements Comparable<Fraction>, Cloneable, Serializable
 {
@@ -28,10 +32,10 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	private final static String ERR_NULL_NUMERATOR = "Numerator is null.";
 	private final static String ERR_NULL_DENOMINATOR = "Denominator is null.";
 	private final static String ERR_NULL_FRACTION = "Fraction is null.";
+	private final static String ERR_NULL_NUMBER = "Number is null.";
 	private final static String ERR_DIVITE_BY_ZERO = "Divide by zero.";
 	private final static String ERR_NUMBER_NAN = "Number is NaN.";
 	private final static String ERR_NUMBER_INFINITE = "Number is infinite.";
-	private final static String ERR_NUMBER_EMPTY = "Number is empty.";
 	
 	// -------------------------------------------------------------------------
 	// Construct method
@@ -70,6 +74,11 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 			denominator = negation(denominator);
 		}
 
+		if (numerator.equals(Fraction.ZERO))
+		{
+			return new Fraction(numerator, denominator);
+		}
+		
 		int gcd = Fraction.greatestCommonDivisor((int) Math.abs(numerator), (int) Math.abs(denominator));
 		
 		return new Fraction(numerator / gcd, denominator / gcd);
@@ -87,7 +96,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	 */
 	public static Fraction createFraction (Integer numerator)
 	{
-		if(numerator == null) throw new NullPointerException(Fraction.ERR_NULL_NUMERATOR);
+		if(numerator == null) throw new NullPointerException(Fraction.ERR_NULL_NUMBER);
 		
 		return new Fraction(numerator, Fraction.ONE);
 	}
@@ -123,7 +132,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	 */
 	public static Fraction createFraction (Long numerator)
 	{
-		if(numerator == null) throw new NullPointerException(Fraction.ERR_NULL_NUMERATOR);
+		if(numerator == null) throw new NullPointerException(Fraction.ERR_NULL_NUMBER);
 		
 		return new Fraction(numerator.intValue(), Fraction.ONE);
 	}
@@ -158,7 +167,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	 */
 	public static Fraction createFraction (Double d)
 	{
-		if(d == null) throw new NullPointerException(Fraction.ERR_NUMBER_EMPTY);
+		if(d == null) throw new NullPointerException(Fraction.ERR_NULL_NUMBER);
 		if(d.isInfinite()) throw new IllegalArgumentException(Fraction.ERR_NUMBER_INFINITE);
 		if(d.isNaN()) throw new IllegalArgumentException(Fraction.ERR_NUMBER_NAN);
 
@@ -197,7 +206,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	//DOCME
 	public Fraction add(Integer number)
 	{
-		if(number == null) throw new IllegalArgumentException(Fraction.ERR_NUMBER_EMPTY);
+		if(number == null) throw new NullPointerException(Fraction.ERR_NULL_NUMBER);
 		
 		return this.add(Fraction.createFraction(number));
 	}
@@ -205,7 +214,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	//DOCME
 	public Fraction add (Fraction fraction)
 	{
-		if(fraction == null) throw new IllegalArgumentException(Fraction.ERR_NULL_FRACTION);
+		if(fraction == null) throw new NullPointerException(Fraction.ERR_NULL_FRACTION);
 		
 		return Fraction.createFraction(this.numerator * fraction.getDenominator() + fraction.getNumerator() * this.denominator, this.denominator * fraction.getDenominator());
 	}
@@ -213,7 +222,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	//DOCME
 	public Fraction add (Double d)
 	{
-		if(d == null) throw new IllegalArgumentException(Fraction.ERR_NUMBER_EMPTY);
+		if(d == null) throw new NullPointerException(Fraction.ERR_NULL_NUMBER);
 		if(d.isInfinite()) throw new IllegalArgumentException(Fraction.ERR_NUMBER_INFINITE);
 		if(d.isNaN()) throw new IllegalArgumentException(Fraction.ERR_NUMBER_NAN);
 		
@@ -223,7 +232,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	//DOCME
 	public Fraction multiply (Integer number)
 	{
-		if(number == null) throw new IllegalArgumentException(Fraction.ERR_NUMBER_EMPTY);
+		if(number == null) throw new NullPointerException(Fraction.ERR_NULL_NUMBER);
 		
 		return Fraction.createFraction(number * this.numerator, this.denominator);
 	}
@@ -231,7 +240,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	//DOCME
 	public Fraction multiply (Fraction fraction)
 	{
-		if(fraction == null) throw new IllegalArgumentException(Fraction.ERR_NULL_FRACTION);
+		if(fraction == null) throw new NullPointerException(Fraction.ERR_NULL_FRACTION);
 		
 		return Fraction.createFraction(fraction.getNumerator() * this.numerator, fraction.getDenominator() * this.denominator);
 	}
@@ -239,7 +248,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	//DOCME
 	public Fraction multiply (Double d)
 	{
-		if(d == null) throw new IllegalArgumentException(Fraction.ERR_NUMBER_EMPTY);
+		if(d == null) throw new NullPointerException(Fraction.ERR_NULL_NUMBER);
 		if(d.isInfinite()) throw new IllegalArgumentException(Fraction.ERR_NUMBER_INFINITE);
 		if(d.isNaN()) throw new IllegalArgumentException(Fraction.ERR_NUMBER_NAN);
 		
@@ -249,7 +258,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	//DOCME
 	public Fraction subtract (Integer number)
 	{
-		if(number == null) throw new IllegalArgumentException(Fraction.ERR_NUMBER_EMPTY);
+		if(number == null) throw new NullPointerException(Fraction.ERR_NULL_NUMBER);
 		
 		return this.subtract(Fraction.createFraction(number));
 	}
@@ -257,7 +266,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	//DOCME
 	public Fraction subtract (Fraction fraction)
 	{
-		if(fraction == null) throw new IllegalArgumentException(Fraction.ERR_NULL_FRACTION);
+		if(fraction == null) throw new NullPointerException(Fraction.ERR_NULL_FRACTION);
 		
 		return Fraction.createFraction(this.numerator * fraction.getDenominator() - fraction.getNumerator() * this.denominator, this.denominator * fraction.getDenominator());
 	}
@@ -265,55 +274,109 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	//DOCME
 	public Fraction subtract (Double d)
 	{
-		if(d == null) throw new IllegalArgumentException(Fraction.ERR_NUMBER_EMPTY);
+		if(d == null) throw new NullPointerException(Fraction.ERR_NULL_NUMBER);
 		if(d.isInfinite()) throw new IllegalArgumentException(Fraction.ERR_NUMBER_INFINITE);
 		if(d.isNaN()) throw new IllegalArgumentException(Fraction.ERR_NUMBER_NAN);
 		
 		return this.subtract(Fraction.createFraction(d));
 	}
 	
-	//DOCME
+	/**
+	 * @return this / number
+	 * 
+	 * @throws NullPointerException if number is null
+	 * @throws ArithmeticException if number is zero
+	 */
 	public Fraction divide (Integer number)
 	{
-		if (number == null) throw new IllegalArgumentException(Fraction.ERR_NUMBER_EMPTY);
+		if (number == null) throw new NullPointerException(Fraction.ERR_NULL_NUMBER);
 		if (number == Fraction.ZERO) throw new ArithmeticException(Fraction.ERR_DIVITE_BY_ZERO);
 		
 		return this.divide(Fraction.createFraction(number));
 	}
 	
-	//DOCME
+	/**
+	 * @return this / fraction
+	 * 
+	 * @throws NullPointerException if fraction is null
+	 * @throws ArithmeticException if fraction numerator is zero
+	 */
 	public Fraction divide (Fraction fraction)
 	{
-		if (fraction == null) throw new IllegalArgumentException(Fraction.ERR_NULL_FRACTION);
+		if (fraction == null) throw new NullPointerException(Fraction.ERR_NULL_FRACTION);
 		if (fraction.getNumerator() == Fraction.ZERO) throw new ArithmeticException(Fraction.ERR_DIVITE_BY_ZERO);
 		
 		return Fraction.createFraction(this.numerator * fraction.getDenominator(), this.denominator * fraction.getNumerator());
 	}
 	
-	//DOCME
+	/**
+	 * @return this / double number
+	 * 
+	 * @throws NullPointerException if number is null
+	 * @throws ArithmeticException if number is zero
+	 * @throws IllegalArgumentException if number is infinite or NaN
+	 */
 	public Fraction divide (Double d)
 	{
-		if (d == null) throw new IllegalArgumentException(Fraction.ERR_NUMBER_EMPTY);
+		if (d == null) throw new NullPointerException(Fraction.ERR_NULL_NUMBER);
+		if (d.isInfinite()) throw new IllegalArgumentException(Fraction.ERR_NUMBER_INFINITE);
+		if (d.isNaN()) throw new IllegalArgumentException(Fraction.ERR_NUMBER_NAN);
 		if (d == Fraction.ZERO) throw new ArithmeticException(Fraction.ERR_DIVITE_BY_ZERO);
 		
 		return this.divide(Fraction.createFraction(d));
 	}
 	
-	//DOCME
+	/**
+	 * Returns the bigger fraction. If instance is bigger that inserted fraction return instance else return inserted fraction.
+	 * 
+	 * @param fraction (Fraction) comparing fractions
+	 * 
+	 * @return (Fraction)
+	 * 
+	 * @throws NullPointerException if fraction is null
+	 */
 	public Fraction max (Fraction fraction)
 	{
+		if (fraction == null) throw new NullPointerException(Fraction.ERR_NULL_FRACTION);
+		
 		return this.compareTo(fraction) >= 0 ? this : fraction;
 	}
 	
-	//DOCME
+	/**
+	 * Returns the smaller fraction. If instance is smaller that inserted fraction return instance else return inserted fraction.
+	 * 
+	 * @param fraction (Fraction) comparing fractions
+	 * 
+	 * @return (Fraction)
+	 * 
+	 * @throws NullPointerException if fraction is null
+	 */
 	public Fraction min (Fraction fraction)
 	{
+		if (fraction == null) throw new NullPointerException(Fraction.ERR_NULL_FRACTION);
+		
 		return this.compareTo(fraction) <= 0 ? this : fraction;
 	}
 	
-	//DOCME
-	public Fraction pow (int exponent)
+	/**
+	 * Create power of fraction.
+	 * <p>
+	 * Examples:<br />
+	 * - (2/3)<sup>0</sup> = 1/1<br />
+	 * - (2/3)<sup>1</sup> = 2/3<br />
+	 * - (2/3)<sup>2</sup> = 4/9<br />
+	 * - (2/3)<sup>-2</sup> = 9/4<br />
+	 * </p>
+	 * @param exponent (Integer)
+	 *
+	 * @return (Fraction)
+	 * 
+	 * @throws NullPointerException if exponent is null
+	 */
+	public Fraction pow (Integer exponent)
 	{
+		if (exponent == null) throw new NullPointerException("Exponent can't be null.");
+		
 		if(exponent == 0)
 		{
 			return Fraction.createFraction(1);
@@ -332,7 +395,18 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 		}
 	}
 	
-	//DOCME
+	/**
+	 * <p>
+	 * Create new reciprocal fraction from instance.
+	 * </p>
+	 * <p>
+	 * Example: 2/3 &rarr; 3/2
+	 * </p>
+	 * 
+	 * @return (Fraction)
+	 * 
+	 * @throws ArithmeticException if numerator of instance is zero
+	 */
 	public Fraction reciprocal()
 	{
 		if (this.numerator == 0) throw new ArithmeticException(Fraction.ERR_DIVITE_BY_ZERO);
@@ -340,19 +414,33 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 		return Fraction.createFraction(this.denominator, this.numerator);
 	}
 	
-	//DOCME
+	/**
+	 * Generate random fraction. Use <em>Math.random()</em>
+	 * 
+	 * @return (Fraction)
+	 * 
+	 * @see java.lang.Math.random()
+	 */
 	public static Fraction random()
 	{
 		return Fraction.createFraction(Math.random());
 	}
 	
-	//DOCME
+	/**
+	 * Get numerator from fraction.
+	 * 
+	 * @return (Integer)
+	 */
 	public Integer getNumerator()
 	{
 		return this.numerator;
 	}
 
-	//DOCME
+	/**
+	 * Get denominator from fraction.
+	 * 
+	 * @return (Integer)
+	 */
 	public Integer getDenominator()
 	{
 		return this.denominator;
@@ -540,6 +628,9 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 		return (13 + this.numerator.hashCode()) * 13 + this.denominator.hashCode();
 	}
 
+	/**
+	 * Return string representation of fraction.
+	 */
 	@Override
 	public String toString()
 	{
@@ -592,5 +683,4 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	{
 		return a * -1;
 	}
-	
 }
