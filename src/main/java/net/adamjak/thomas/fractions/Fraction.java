@@ -162,8 +162,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	 * @return (Fraction) 
 	 * 
 	 * @throws NullPointerException when <em>d</em> is null
-	 * @throws IllegalArgumentException if <em>d</em> is infinite
-	 * @throws IllegalArgumentException if <em>d</em> is NaN
+	 * @throws IllegalArgumentException if <em>d</em> is infinite or NaN
 	 */
 	public static Fraction createFraction (Double d)
 	{
@@ -203,7 +202,11 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	// Calculate method
 	// -------------------------------------------------------------------------
 	
-	//DOCME
+	/**
+	 * @return New Instance of fraction add by number
+	 * 
+	 * @throws NullPointerException if number is null
+	 */
 	public Fraction add(Integer number)
 	{
 		if(number == null) throw new NullPointerException(Fraction.ERR_NULL_NUMBER);
@@ -211,7 +214,11 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 		return this.add(Fraction.createFraction(number));
 	}
 	
-	//DOCME
+	/**
+	 * @return New Instance of fraction add by fraction
+	 * 
+	 * @throws NullPointerException if fraction is null
+	 */
 	public Fraction add (Fraction fraction)
 	{
 		if(fraction == null) throw new NullPointerException(Fraction.ERR_NULL_FRACTION);
@@ -219,7 +226,12 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 		return Fraction.createFraction(this.numerator * fraction.getDenominator() + fraction.getNumerator() * this.denominator, this.denominator * fraction.getDenominator());
 	}
 	
-	//DOCME
+	/**
+	 * @return New Instance of fraction add by double number
+	 * 
+	 * @throws NullPointerException if number is null
+	 * @throws IllegalArgumentException if number is infinite or NaN
+	 */
 	public Fraction add (Double d)
 	{
 		if(d == null) throw new NullPointerException(Fraction.ERR_NULL_NUMBER);
@@ -229,7 +241,11 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 		return this.add(Fraction.createFraction(d));
 	}
 	
-	//DOCME
+	/**
+	 * @return New instance of Fraction multyply by number
+	 * 
+	 * @throws NullPointerException if number is null
+	 */
 	public Fraction multiply (Integer number)
 	{
 		if(number == null) throw new NullPointerException(Fraction.ERR_NULL_NUMBER);
@@ -237,7 +253,11 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 		return Fraction.createFraction(number * this.numerator, this.denominator);
 	}
 	
-	//DOCME
+	/**
+	 * @return New instance of Fraction multyply by number
+	 * 
+	 * @throws NullPointerException if fraction is null
+	 */
 	public Fraction multiply (Fraction fraction)
 	{
 		if(fraction == null) throw new NullPointerException(Fraction.ERR_NULL_FRACTION);
@@ -245,7 +265,12 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 		return Fraction.createFraction(fraction.getNumerator() * this.numerator, fraction.getDenominator() * this.denominator);
 	}
 	
-	//DOCME
+	/**
+	 * @return New instance of Fraction multyply by number
+	 * 
+	 * @throws NullPointerException if number is null
+	 * @throws IllegalArgumentException if number is infinite or NaN
+	 */
 	public Fraction multiply (Double d)
 	{
 		if(d == null) throw new NullPointerException(Fraction.ERR_NULL_NUMBER);
@@ -255,7 +280,11 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 		return this.multiply(Fraction.createFraction(d));
 	}
 	
-	//DOCME
+	/**
+	 * @return New instance of Fraction subtract by number
+	 * 
+	 * @throws NullPointerException if number is null
+	 */
 	public Fraction subtract (Integer number)
 	{
 		if(number == null) throw new NullPointerException(Fraction.ERR_NULL_NUMBER);
@@ -263,7 +292,11 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 		return this.subtract(Fraction.createFraction(number));
 	}
 	
-	//DOCME
+	/**
+	 * @return New instance of Fraction subtract by fraction
+	 * 
+	 * @throws NullPointerException if fraction is null
+	 */
 	public Fraction subtract (Fraction fraction)
 	{
 		if(fraction == null) throw new NullPointerException(Fraction.ERR_NULL_FRACTION);
@@ -271,7 +304,12 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 		return Fraction.createFraction(this.numerator * fraction.getDenominator() - fraction.getNumerator() * this.denominator, this.denominator * fraction.getDenominator());
 	}
 	
-	//DOCME
+	/**
+	 * @return New instance of Fraction subtract by double number
+	 * 
+	 * @throws NullPointerException if number is null
+	 * @throws IllegalArgumentException if number is infinite or NaN
+	 */
 	public Fraction subtract (Double d)
 	{
 		if(d == null) throw new NullPointerException(Fraction.ERR_NULL_NUMBER);
@@ -282,7 +320,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	}
 	
 	/**
-	 * @return this / number
+	 * @return New instance of Fraction divide by number.
 	 * 
 	 * @throws NullPointerException if number is null
 	 * @throws ArithmeticException if number is zero
@@ -296,7 +334,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	}
 	
 	/**
-	 * @return this / fraction
+	 * @return New instance of Fraction divide by fraction.
 	 * 
 	 * @throws NullPointerException if fraction is null
 	 * @throws ArithmeticException if fraction numerator is zero
@@ -310,7 +348,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	}
 	
 	/**
-	 * @return this / double number
+	 * @return New instance of Fraction divide by double number.
 	 * 
 	 * @throws NullPointerException if number is null
 	 * @throws ArithmeticException if number is zero
@@ -412,6 +450,26 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 		if (this.numerator == 0) throw new ArithmeticException(Fraction.ERR_DIVITE_BY_ZERO);
 		
 		return Fraction.createFraction(this.denominator, this.numerator);
+	}
+	
+	/**
+	 * Percentage value of fraction.
+	 * 
+	 * @return (Double)
+	 */
+	public Double inPercentage()
+	{
+		return this.doubleValue() * 100;
+	}
+	
+	/**
+	 * Natural logarithm of fraction. User <em>Math.log()</em>
+	 * 
+	 * @return (Double)
+	 */
+	public Double log()
+	{
+		return Math.log(this.numerator) - Math.log(this.denominator);
 	}
 	
 	/**
@@ -587,7 +645,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	@Override
 	public int compareTo(Fraction fraction)
 	{	
-		if(fraction == null) throw new IllegalArgumentException("Null argument");
+		if(fraction == null) throw new NullPointerException();
 		
 		if(Fraction.signum(this.numerator) != Fraction.signum(fraction.getNumerator()))
 		{

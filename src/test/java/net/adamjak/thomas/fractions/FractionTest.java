@@ -227,6 +227,17 @@ public class FractionTest
 		Fraction result = instance.add(number);
 		assertEquals(expResult, result);
 	}
+	
+	/**
+	 * Test of exception in add method, of class Fraction.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testAdd_Integer_NullPointerException()
+	{
+		Integer nullInt = null;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.add(nullInt);
+	}
 
 	/**
 	 * Test of add method, of class Fraction.
@@ -239,6 +250,17 @@ public class FractionTest
 		Fraction expResult = Fraction.createFraction(22, 15);
 		Fraction result = instance.add(fraction);
 		assertEquals(expResult, result);
+	}
+	
+	/**
+	 * Test of exception in add method, of class Fraction.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testAdd_Fraction_NullPointerException()
+	{
+		Fraction nullFrac = null;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.add(nullFrac);
 	}
 
 	/**
@@ -253,6 +275,39 @@ public class FractionTest
 		Fraction result = instance.add(d);
 		assertEquals(expResult, result);
 	}
+	
+	/**
+	 * Test of exception in add method, of class Fraction.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testAdd_Double_NullPointerException()
+	{
+		Double nullDouble = null;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.add(nullDouble);
+	}
+	
+	/**
+	 * Test of exception in add method, of class Fraction.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testAdd_Double_IllegalArgumentException_Infinite()
+	{
+		Double infiniteDouble = Double.POSITIVE_INFINITY;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.add(infiniteDouble);
+	}
+	
+	/**
+	 * Test of exception in add method, of class Fraction.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testAdd_Double_IllegalArgumentException_Nan()
+	{
+		Double nanDouble = Double.NaN;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.add(nanDouble);
+	}
 
 	/**
 	 * Test of multiply method, of class Fraction.
@@ -265,6 +320,17 @@ public class FractionTest
 		Fraction expResult = Fraction.createFraction(10, 3);
 		Fraction result = instance.multiply(number);
 		assertEquals(expResult, result);
+	}
+	
+	/**
+	 * Test of exception in multiply method, of class Fraction.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testMultiply_Integer_NullPointerException()
+	{
+		Integer nullInt = null;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.multiply(nullInt);
 	}
 
 	/**
@@ -279,6 +345,17 @@ public class FractionTest
 		Fraction result = instance.multiply(fraction);
 		assertEquals(expResult, result);
 	}
+	
+	/**
+	 * Test of exception in multiply method, of class Fraction.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testMultiply_Fraction_NullPointerException()
+	{
+		Fraction nullFrac = null;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.multiply(nullFrac);
+	}
 
 	/**
 	 * Test of multiply method, of class Fraction.
@@ -291,6 +368,39 @@ public class FractionTest
 		Fraction expResult = Fraction.createFraction(1, 3);
 		Fraction result = instance.multiply(d);
 		assertEquals(expResult, result);
+	}
+	
+	/**
+	 * Test of exception in multiply method, of class Fraction.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testMultiply_Double_NullPointerException()
+	{
+		Double nullDouble = null;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.multiply(nullDouble);
+	}
+	
+	/**
+	 * Test of exception in multiply method, of class Fraction.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testMultiply_Double_IllegalArgumentException_Infinite()
+	{
+		Double infiniteDouble = Double.POSITIVE_INFINITY;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.multiply(infiniteDouble);
+	}
+	
+	/**
+	 * Test of exception in multiply method, of class Fraction.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testMultiply_Double_IllegalArgumentException_Nan()
+	{
+		Double nanDouble = Double.NaN;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.multiply(nanDouble);
 	}
 
 	/**
@@ -305,6 +415,17 @@ public class FractionTest
 		Fraction result = instance.subtract(number);
 		assertEquals(expResult, result);
 	}
+	
+	/**
+	 * Test of exception in subtract method, of class Fraction.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testSubtract_Integer_NullPointerException()
+	{
+		Integer nullInt = null;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.subtract(nullInt);
+	}
 
 	/**
 	 * Test of subtract method, of class Fraction.
@@ -318,6 +439,17 @@ public class FractionTest
 		Fraction result = instance.subtract(fraction);
 		assertEquals(expResult, result);
 	}
+	
+	/**
+	 * Test of exception in subtract method, of class Fraction.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testSubtract_Fraction_NullPointerException()
+	{
+		Fraction nullFrac = null;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.subtract(nullFrac);
+	}
 
 	/**
 	 * Test of subtract method, of class Fraction.
@@ -330,6 +462,39 @@ public class FractionTest
 		Fraction expResult = Fraction.createFraction(1, 2);
 		Fraction result = instance.subtract(d);
 		assertEquals(expResult, result);
+	}
+	
+	/**
+	 * Test of exception in subtract method, of class Fraction.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testSubtract_Double_NullPointerException()
+	{
+		Double nullDouble = null;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.subtract(nullDouble);
+	}
+	
+	/**
+	 * Test of exception in subtract method, of class Fraction.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testSubtract_Double_IllegalArgumentException_Infinite()
+	{
+		Double infiniteDouble = Double.POSITIVE_INFINITY;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.subtract(infiniteDouble);
+	}
+	
+	/**
+	 * Test of exception in subtract method, of class Fraction.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testSubtract_Double_IllegalArgumentException_Nan()
+	{
+		Double nanDouble = Double.NaN;
+		Fraction instance = Fraction.createFraction(2, 3);
+		instance.subtract(nanDouble);
 	}
 
 	/**
@@ -582,11 +747,38 @@ public class FractionTest
 		assertEquals(expResult, result);
 	}
 	
+	/**
+	 * Test of exception in reciprocal method, of class Fraction.
+	 */
 	@Test(expected = ArithmeticException.class)
 	public void testReciprocal_ArithmeticException()
 	{
 		Fraction instance = Fraction.createFraction(0, 3);
 		instance.reciprocal();
+	}
+	
+	/**
+	 * Test of inPercentage method, of class Fraction.
+	 */
+	@Test
+	public void testInPercentage()
+	{
+		Fraction instance = Fraction.createFraction(1, 2);
+		Double expResult = 50.0;
+		Double result = instance.inPercentage();
+		assertEquals(expResult, result);
+	}
+	
+	/**
+	 * Test of log method, of class Fraction.
+	 */
+	@Test
+	public void testLog()
+	{
+		Fraction instance = Fraction.createFraction(1, 3);
+		Double expResult = -1.09861228866810969139524523692252570464749055782274;
+		Double result = instance.log();
+		assertEquals(expResult, result, 0.00000001);
 	}
 
 	/**
