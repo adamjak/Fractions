@@ -12,7 +12,7 @@ import java.text.ParseException;
  * 
  * @author Tomas Adamjak <thomas@adamjak.net>
  * 
- * @see http://fractions.thomas.adamjak.net
+ * @see <a href="http://fractions.thomas.adamjak.net">http://fractions.thomas.adamjak.net</a>
  */
 public class Fraction extends Number implements Comparable<Fraction>, Cloneable, Serializable
 {
@@ -476,8 +476,6 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	 * Generate random fraction. Use <em>Math.random()</em>
 	 * 
 	 * @return (Fraction)
-	 * 
-	 * @see java.lang.Math.random()
 	 */
 	public static Fraction random()
 	{
