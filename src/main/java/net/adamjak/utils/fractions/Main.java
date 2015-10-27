@@ -2,7 +2,7 @@
  * Copyright 2015 Tomas Adamjak - http://thomas.adamjak.net 
  * License: The BSD 3-Clause License
  */
-package net.adamjak.thomas.fractions;
+package net.adamjak.utils.fractions;
 
 import java.text.ParseException;
 
