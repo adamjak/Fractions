@@ -29,6 +29,7 @@ public class Main
 		System.out.println("Max: " + f1.max(f2));
 		System.out.println("Min: " + f1.min(f2));
 		System.out.println("Reciprocal: " + f1.reciprocal());
+		System.out.println("Complement of " + f1 + " to 1 is " + f1.complement());
 		
 		System.out.println("Random: " + Fraction.random());
 		
@@ -36,6 +37,8 @@ public class Main
 		
 		System.out.println("Power: " + f1.pow(2));
 		
-		System.out.println("Parse: " + Fraction.tryParse("1/2",'/'));
+		System.out.println("Parse: " + Fraction.tryParse("1/2"));
+		System.out.println("Parse: " + Fraction.tryParse("1:2:3",':'));
+		System.out.println("Parse: " + Fraction.tryParse("1.6"));
 	}
 }

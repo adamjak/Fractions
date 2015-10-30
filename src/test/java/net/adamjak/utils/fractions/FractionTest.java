@@ -482,6 +482,18 @@ public class FractionTest
 		Double result = instance.log();
 		assertEquals(expResult, result, 0.00000001);
 	}
+	
+	/**
+	 * Test of complement method, of class Fraction.
+	 */
+	@Test
+	public void testComplement()
+	{
+		Fraction instance = Fraction.createFraction(3, 4);
+		Fraction expResult = Fraction.createFraction(1, 4);
+		Fraction result = instance.complement();
+		assertEquals(expResult, result);
+	}
 
 	/**
 	 * Test of random method, of class Fraction.

@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * 
  * @author Tomas Adamjak <thomas@adamjak.net>
  * 
- * @see <a href="http://fractions.thomas.adamjak.net">http://fractions.thomas.adamjak.net</a>
+ * @see <a href="http://utils.adamjak.net">Utils.adamjak.net</a>
  */
 public class Fraction extends Number implements Comparable<Fraction>, Cloneable, Serializable
 {
@@ -430,6 +430,16 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	{
 		return Math.log(this.numerator) - Math.log(this.denominator);
 	}
+
+	/**
+	 * Returns fraction which, after the sum with this fraction is 1.
+	 * 
+	 * @return (Fraction)
+	 */	
+	public Fraction complement()
+	{
+		return Fraction.createFraction(1).subtract(this);
+	}
 	
 	/**
 	 * Generate random fraction. Use <em>Math.random()</em>
@@ -549,14 +559,18 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	}
 	
 	/**
-	 * tryParse - create Fraction from string and default '/' separator.
+	 * tryParse - create Fraction from string and default '/' separator or if in string is regular number.
 	 * <p>
 	 * Supporded formats:<br />
 	 *	- classic fraction - numerator/denominator<br />
-	 *  - mixed fraction - number/numerator/denominator
+	 *  - mixed fraction - number/numerator/denominator<br />
+	 *  - clasic or double number
 	 * </p>
 	 * <p>
-	 * For example string <em>1/2/3</em> create fraction with value 5/3
+	 * Examples:<br />
+	 *  - string "<em>1/2/3</em>" create fraction with value 5/3<br />
+	 *  - string "<em>1.125</em>" create fraction with value 9/8<br /> 
+	 *  - string "<em>1,125</em>" throws NumberFormatException becauce ',' is not correct decimal separator
 	 * </p>
 	 * @param s (String)
 	 *
@@ -565,10 +579,18 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	 * @throws IllegalArgumentException If string is null or empty
 	 * @throws IllegalArgumentException If separator is null
 	 * @throws ParseException If string haven't correct format
+	 * @throws NumberFormatException if the string does not contain a parsable number.
 	 */
 	public static Fraction tryParse (String s) throws ParseException
 	{
-		return Fraction.tryParse(s, '/');
+		if (s.indexOf("/") > 0)
+		{
+			return Fraction.tryParse(s, '/');
+		}
+		else
+		{
+			return Fraction.privateCreateFraction(Double.valueOf(s));
+		}
 	}
 	
 	// -------------------------------------------------------------------------
