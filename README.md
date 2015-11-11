@@ -40,7 +40,7 @@ Maven
 <dependency>
 	<groupId>net.adamjak.utils</groupId>
 	<artifactId>Fractions</artifactId>
-	<version>0.4.0</version>
+	<version>0.5.1</version>
 </dependency>
 ```
 
