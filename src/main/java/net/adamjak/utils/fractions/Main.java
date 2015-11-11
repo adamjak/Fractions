@@ -8,7 +8,7 @@ import java.text.ParseException;
 
 /**
  *
- * @author Tomas Adamjak <thomas@adamjak.net>
+ * @author Tomas Adamjak - thomas.adamjak.net
  */
 public class Main
 {

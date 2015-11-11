@@ -9,8 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author Tomas Adamjak <thomas@adamjak.net>
+ * @author Tomas Adamjak - thomas.adamjak.net
  */
 public class FractionTest
 {
@@ -487,12 +486,37 @@ public class FractionTest
 	 * Test of complement method, of class Fraction.
 	 */
 	@Test
-	public void testComplement()
+	public void testComplement_One()
 	{
 		Fraction instance = Fraction.createFraction(3, 4);
 		Fraction expResult = Fraction.createFraction(1, 4);
 		Fraction result = instance.complement();
 		assertEquals(expResult, result);
+	}
+	
+	/**
+	 * Test of complement method, of class Fraction.
+	 */
+	@Test
+	public void testComplement_Number()
+	{
+		Fraction instance = Fraction.createFraction(3, 4);
+		Fraction number = Fraction.createFraction(3, 2);
+		Fraction expResult = Fraction.createFraction(3, 4);
+		Fraction result = instance.complement(number);
+		assertEquals(expResult, result);
+	}
+	
+	/**
+	 * Test of complement method, of class Fraction.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testComplement_Number_NullPointerException()
+	{
+		Fraction instance = Fraction.createFraction(3, 4);
+		Double number = null;
+		instance.complement(number);
+		
 	}
 
 	/**
@@ -753,6 +777,11 @@ public class FractionTest
 		Fraction instance = Fraction.createFraction(4, 6);
 		String expResult = "2/3";
 		String result = instance.toString();
+		assertEquals(expResult, result);
+		
+		instance = Fraction.createFraction(2, 1);
+		expResult = "2";
+		result = instance.toString();
 		assertEquals(expResult, result);
 	}
 	

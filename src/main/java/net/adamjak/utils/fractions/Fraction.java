@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Class which represent a fraction and you can calculate math operations with fractions.
  * 
- * @author Tomas Adamjak <thomas@adamjak.net>
+ * @author Tomas Adamjak - thomas.adamjak.net
  * 
  * @see <a href="http://utils.adamjak.net">Utils.adamjak.net</a>
  */
@@ -170,11 +170,11 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	{
 		if(fraction == null) throw new NullPointerException(Fraction.ERR_NULL_FRACTION);
 		
-		return new Fraction(fraction.getNumerator().longValue(), fraction.getDenominator().longValue());
+		return new Fraction(fraction.getNumerator(), fraction.getDenominator());
 	}
 	
 	/**
-	 * privateCreateFraction - creating fraction from double number<br />
+	 * privateCreateFraction - creating fraction from double number<br>
 	 * For example from <em>3.2</em> create 16/5 fraction
 	 * 
 	 * @param d (Double)
@@ -223,6 +223,8 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	// -------------------------------------------------------------------------
 	
 	/**
+	 * @param number (Number) whitch will add to Fraction
+	 * 
 	 * @return New Instance of fraction add by number
 	 * 
 	 * @throws NullPointerException if number is null
@@ -235,6 +237,8 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	}
 	
 	/**
+	 * @param fraction (Fraction) whitch will add to Fraction
+	 * 
 	 * @return New Instance of fraction add by fraction
 	 * 
 	 * @throws NullPointerException if fraction is null
@@ -248,6 +252,8 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	
 	
 	/**
+	 * @param number (Number) whitch will multiply Fraction
+	 * 
 	 * @return New instance of Fraction multyply by number
 	 * 
 	 * @throws NullPointerException if number is null
@@ -260,6 +266,8 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	}
 	
 	/**
+	 * @param fraction (Fraction) whitch will multiply Fraction
+	 * 
 	 * @return New instance of Fraction multyply by number
 	 * 
 	 * @throws NullPointerException if fraction is null
@@ -272,6 +280,8 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	}
 	
 	/**
+	 * @param number (Number) whitch will subtract Fraction
+	 * 
 	 * @return New instance of Fraction subtract by number
 	 * 
 	 * @throws NullPointerException if number is null
@@ -284,6 +294,8 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	}
 	
 	/**
+	 * @param fraction (Fraction) whitch will subtract Fraction
+	 * 
 	 * @return New instance of Fraction subtract by fraction
 	 * 
 	 * @throws NullPointerException if fraction is null
@@ -296,6 +308,8 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	}
 	
 	/**
+	 * @param number (Number) whitch will divide Fraction
+	 * 
 	 * @return New instance of Fraction divide by number.
 	 * 
 	 * @throws NullPointerException if number is null
@@ -310,6 +324,8 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	}
 	
 	/**
+	 * @param fraction (Fraction) whitch will divide Fraction
+	 * 
 	 * @return New instance of Fraction divide by fraction.
 	 * 
 	 * @throws NullPointerException if fraction is null
@@ -358,11 +374,11 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	/**
 	 * Create power of fraction.
 	 * <p>
-	 * Examples:<br />
-	 * - (2/3)<sup>0</sup> = 1/1<br />
-	 * - (2/3)<sup>1</sup> = 2/3<br />
-	 * - (2/3)<sup>2</sup> = 4/9<br />
-	 * - (2/3)<sup>-2</sup> = 9/4<br />
+	 * Examples:<br>
+	 * - (2/3)<sup>0</sup> = 1/1<br>
+	 * - (2/3)<sup>1</sup> = 2/3<br>
+	 * - (2/3)<sup>2</sup> = 4/9<br>
+	 * - (2/3)<sup>-2</sup> = 9/4<br>
 	 * </p>
 	 * @param exponent (Integer)
 	 *
@@ -438,7 +454,20 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	 */	
 	public Fraction complement()
 	{
-		return Fraction.createFraction(1).subtract(this);
+		return this.complement(1);
+	}
+	
+	/**
+	 * Returns fraction which, after the sum with this fraction is inserted number.
+	 * 
+	 * @param number (Number)
+	 * @return (Fraction)
+	 */
+	public Fraction complement(Number number)
+	{
+		if (number == null) throw new NullPointerException(Fraction.ERR_NULL_NUMBER);
+		
+		return Fraction.createFraction(number).subtract(this);
 	}
 	
 	/**
@@ -474,9 +503,9 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	/**
 	 * tryParse - create Fraction from string and separator.
 	 * <p>
-	 * Supporded formats:<br />
-	 *  - simple number - numerator<br />
-	 *	- classic fraction - numerator[separator]denominator<br />
+	 * Supporded formats:<br>
+	 *  - simple number - numerator<br>
+	 *	- classic fraction - numerator[separator]denominator<br>
 	 *  - mixed fraction - number[separator]numerator[separator]denominator
 	 * </p>
 	 * <p>
@@ -561,15 +590,15 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	/**
 	 * tryParse - create Fraction from string and default '/' separator or if in string is regular number.
 	 * <p>
-	 * Supporded formats:<br />
-	 *	- classic fraction - numerator/denominator<br />
-	 *  - mixed fraction - number/numerator/denominator<br />
+	 * Supporded formats:<br>
+	 *	- classic fraction - numerator/denominator<br>
+	 *  - mixed fraction - number/numerator/denominator<br>
 	 *  - clasic or double number
 	 * </p>
 	 * <p>
-	 * Examples:<br />
-	 *  - string "<em>1/2/3</em>" create fraction with value 5/3<br />
-	 *  - string "<em>1.125</em>" create fraction with value 9/8<br /> 
+	 * Examples:<br>
+	 *  - string "<em>1/2/3</em>" create fraction with value 5/3<br>
+	 *  - string "<em>1.125</em>" create fraction with value 9/8<br> 
 	 *  - string "<em>1,125</em>" throws NumberFormatException becauce ',' is not correct decimal separator
 	 * </p>
 	 * @param s (String)
@@ -579,7 +608,6 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	 * @throws IllegalArgumentException If string is null or empty
 	 * @throws IllegalArgumentException If separator is null
 	 * @throws ParseException If string haven't correct format
-	 * @throws NumberFormatException if the string does not contain a parsable number.
 	 */
 	public static Fraction tryParse (String s) throws ParseException
 	{
@@ -589,7 +617,29 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 		}
 		else
 		{
-			return Fraction.privateCreateFraction(Double.valueOf(s));
+			
+			try
+			{
+				return Fraction.privateCreateFraction(Double.valueOf(s));
+			}
+			catch (NumberFormatException nfe)
+			{
+				int i = 0;
+				for (Character c : s.toCharArray())
+				{
+					try
+					{
+						Integer.parseInt(c.toString());
+					}
+					catch (NumberFormatException e)
+					{
+						break;
+					}
+					
+					i++;
+				}
+				throw new ParseException(nfe.getMessage(), i);
+			}
 		}
 	}
 	
@@ -666,11 +716,16 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	}
 
 	/**
-	 * Return string representation of fraction.
+	 * @return String representation of fraction.
 	 */
 	@Override
 	public String toString()
 	{
+		if (this.denominator == Fraction.ONE)
+		{
+			return this.numerator.toString();
+		}
+		
 		return this.numerator + "/" + this.denominator;
 	}
 
