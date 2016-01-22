@@ -109,7 +109,17 @@ public class FractionTest
 		Fraction.createFraction(fraction);
 	}
 
-	
+	/**
+	 * Test of toBigfraction method, of class Fraction.
+	 */
+	@Test
+	public void testToBigFraction()
+	{
+		Fraction fraction = Fraction.createFraction(1,2);
+		BigFraction expResult = BigFraction.createFraction(1,2);
+		BigFraction result = fraction.toBigFraction();
+		assertEquals(expResult,result);
+	}
 
 	/**
 	 * Test of add method, of class Fraction.
@@ -379,7 +389,7 @@ public class FractionTest
 	@Test
 	public void testPowPositive()
 	{
-		Integer exponent = 3;
+		Double exponent = 3.0;
 		Fraction instance = Fraction.createFraction(2, 3);
 		Fraction expResult = Fraction.createFraction(8, 27);
 		Fraction result = instance.pow(exponent);
@@ -392,7 +402,7 @@ public class FractionTest
 	@Test
 	public void testPow1()
 	{
-		Integer exponent = 1;
+		Double exponent = 1.0;
 		Fraction instance = Fraction.createFraction(2, 3);
 		Fraction expResult = Fraction.createFraction(2, 3);
 		Fraction result = instance.pow(exponent);
@@ -405,7 +415,7 @@ public class FractionTest
 	@Test
 	public void testPow0()
 	{
-		Integer exponent = 0;
+		Double exponent = 0.0;
 		Fraction instance = Fraction.createFraction(2, 3);
 		Fraction expResult = Fraction.createFraction(1, 1);
 		Fraction result = instance.pow(exponent);
@@ -418,7 +428,7 @@ public class FractionTest
 	@Test
 	public void testPowNegative()
 	{
-		Integer exponent = -2;
+		Double exponent = -2.0;
 		Fraction instance = Fraction.createFraction(2, 3);
 		Fraction expResult = Fraction.createFraction(9, 4);
 		Fraction result = instance.pow(exponent);
@@ -431,7 +441,7 @@ public class FractionTest
 	@Test(expected = NullPointerException.class)
 	public void testPow_NullPointerException()
 	{
-		Integer nullInt = null;
+		Double nullInt = null;
 		Fraction instance = Fraction.createFraction(2, 3);
 		instance.pow(nullInt);
 	}
