@@ -40,7 +40,7 @@ Maven
 <dependency>
 	<groupId>net.adamjak.utils</groupId>
 	<artifactId>Fractions</artifactId>
-	<version>0.5.1</version>
+	<version>0.6.0</version>
 </dependency>
 ```
 
@@ -65,6 +65,7 @@ Fraction f4 = Fraction.createFraction(f3);    // 5/2
 Fraction f5 = Fraction.tryParse(s1);          // 4/5
 Fraction f6 = Fraction.tryParse(s2,c1);       // 5/3
 Fraction f7 = Fraction.random();              // create new random fraction
+// Same create methods are for BigFraction.
 ```
 
 ### Math operations
