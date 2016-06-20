@@ -4,8 +4,10 @@
  */
 package net.adamjak.utils.fractions;
 
-import java.text.ParseException;
 import org.junit.Test;
+
+import java.text.ParseException;
+
 import static org.junit.Assert.*;
 
 /**
@@ -71,6 +73,21 @@ public class FractionTest
 		Long expResultNumerator = 3L;
 		Long expResultDenominator = 1L;
 		Fraction result = Fraction.createFraction(numerator);
+		assertEquals(expResultNumerator, result.getNumerator());
+		assertEquals(expResultDenominator, result.getDenominator());
+	}
+
+	/**
+	 * Test of createFraction method, of class Fraction.
+	 */
+	@Test
+	public void testCreateFraction_Number_Double()
+	{
+		Double numerator = 0.0059e-3;
+		Long expResultNumerator = 59L;
+		Long expResultDenominator = 10000000L;
+		Fraction result = Fraction.createFraction(numerator);
+
 		assertEquals(expResultNumerator, result.getNumerator());
 		assertEquals(expResultDenominator, result.getDenominator());
 	}
@@ -794,5 +811,4 @@ public class FractionTest
 		result = instance.toString();
 		assertEquals(expResult, result);
 	}
-	
 }

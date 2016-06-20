@@ -5,6 +5,7 @@
 package net.adamjak.utils.fractions;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.ParseException;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -177,26 +178,29 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 		}
 
 		boolean negative = false;
-		
+
 		if (d < 0)
 		{
 			negative = true;
 		}
-		
+
 		d = Math.abs(d);
-		
-		int intValue = d.intValue();
-		long decimalPart = Long.valueOf(d.toString().split("\\.")[1]);
-		int decimalPartLenght = String.valueOf(decimalPart).length();
-		Long tmpDenominator = (long) Math.pow(10, decimalPartLenght);
-		Long tmpNumerator = intValue * tmpDenominator + decimalPart;
-		
+
+		Integer intPart = d.intValue();
+		d = d - intPart;
+
+		Long numerator = Double.valueOf(d * Math.pow(10,FractionConstants.LONG_DIGITS)).longValue();
+		Long denominator = Double.valueOf(Math.pow(10,FractionConstants.LONG_DIGITS)).longValue();
+
 		if (negative)
 		{
-			tmpNumerator = tmpNumerator * -1;
+			numerator = numerator * -1;
 		}
-		
-		return Fraction.createFraction(tmpNumerator, tmpDenominator);
+
+		Fraction f = Fraction.createFraction(numerator,denominator);
+		f = f.add(intPart);
+
+		return f;
 	}
 
 	/**
@@ -387,7 +391,7 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 		}
 		else if (exponent == 1)
 		{
-			return this;
+			return Fraction.createFraction(this.getNumerator(),this.getDenominator());
 		}
 		else if (exponent < 0)
 		{
@@ -765,5 +769,11 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 	private static long negation(long a)
 	{
 		return a * -1;
+	}
+
+	private static String doubleToString(Double d)
+	{
+		BigDecimal bigDecimal = new BigDecimal(d);
+		return bigDecimal.toPlainString();
 	}
 }

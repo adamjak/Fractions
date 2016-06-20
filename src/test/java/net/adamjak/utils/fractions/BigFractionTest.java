@@ -78,6 +78,19 @@ public class BigFractionTest
 		assertEquals(expResultNumerator, result.getNumerator());
 		assertEquals(expResultDenominator, result.getDenominator());
 	}
+	
+	@Test
+	public void testCreateFraction_Number_Double()
+	{
+		Double numerator = 0.0059e-3;
+		BigInteger expResultNumerator = BigInteger.valueOf(59L);
+		BigInteger expResultDenominator = BigInteger.valueOf(10000000L);
+		BigFraction result = BigFraction.createFraction(numerator);
+
+		assertEquals(expResultNumerator, result.getNumerator());
+		assertEquals(expResultDenominator, result.getDenominator());
+	}
+
 
 	@Test(expected = NullPointerException.class)
 	public void testCreateFraction_Fraction_NullPointerException()

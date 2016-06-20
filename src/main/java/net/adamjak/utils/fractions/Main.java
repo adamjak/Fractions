@@ -41,8 +41,10 @@ public class Main
 //		System.out.println("Parse: " + Fraction.tryParse("1:2:3",':'));
 //		System.out.println("Parse: " + Fraction.tryParse("1.6"));
 		
-		BigFraction bf = BigFraction.createFraction(1,2);
-		
-		System.out.println(bf);
+//		BigFraction bf = BigFraction.createFraction(1,2);
+//
+//		System.out.println(bf);
+
+		Fraction f = Fraction.createFraction(Fraction.createFraction(Math.PI,2),Fraction.createFraction(2,Math.PI));
 	}
 }

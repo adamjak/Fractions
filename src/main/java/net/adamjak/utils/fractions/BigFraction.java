@@ -194,18 +194,21 @@ public class BigFraction extends Number implements Comparable<BigFraction>, Clon
 
 		d = Math.abs(d);
 
-		int intValue = d.intValue();
-		long decimalPart = Long.valueOf(d.toString().split("\\.")[1]);
-		int decimalPartLenght = String.valueOf(decimalPart).length();
-		BigInteger tmpDenominator = BigInteger.valueOf((long) Math.pow(10, decimalPartLenght));
-		BigInteger tmpNumerator = tmpDenominator.multiply(BigInteger.valueOf(intValue)).add(BigInteger.valueOf(decimalPart));
+		Integer intPart = d.intValue();
+		d = d - intPart;
+
+		Long numerator = Double.valueOf(d * Math.pow(10,FractionConstants.LONG_DIGITS)).longValue();
+		Long denominator = Double.valueOf(Math.pow(10,FractionConstants.LONG_DIGITS)).longValue();
 
 		if (negative)
 		{
-			tmpNumerator = tmpNumerator.negate();
+			numerator = numerator * -1;
 		}
 
-		return BigFraction.createFraction(tmpNumerator, tmpDenominator);
+		BigFraction f = BigFraction.createFraction(numerator,denominator);
+		f = f.add(intPart);
+
+		return f;
 	}
 
 	/**

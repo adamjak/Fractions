@@ -7,6 +7,11 @@ package net.adamjak.utils.fractions;
 public class FractionConstants
 {
 	// -------------------------------------------------------------------------
+	// Utils constants
+	// -------------------------------------------------------------------------
+	final static int LONG_DIGITS = (String.valueOf(Long.MAX_VALUE).length() - 1);
+
+	// -------------------------------------------------------------------------
 	// Number Constants
 	// -------------------------------------------------------------------------
 	public final static long ONE = 1;
