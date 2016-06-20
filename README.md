@@ -8,7 +8,7 @@ Web: <http://thomas.adamjak.net>
 License
 ---------------
 
-Copyright (c) 2015, Tomáš Adamják
+Copyright (c) 2016, Tomáš Adamják
 
 All rights reserved.
 
@@ -40,7 +40,7 @@ Maven
 <dependency>
 	<groupId>net.adamjak.utils</groupId>
 	<artifactId>Fractions</artifactId>
-	<version>0.6.0</version>
+	<version>0.6.1</version>
 </dependency>
 ```
 
