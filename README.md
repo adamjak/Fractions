@@ -5,6 +5,10 @@ Author: Tomáš Adamják
 
 Web: <http://thomas.adamjak.net>
 
+Description
+--------------
+Simple library which enable handling with fractions.
+
 License
 ---------------
 
