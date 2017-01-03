@@ -36,7 +36,7 @@ Maven
 		</releases>
 		<id>Fractions</id>
 		<name>Tomas Adamjak</name>
-		<url>http://repo.adamjak.net/nexus/content/groups/public/</url>
+		<url>http://repo.adamjak.net/nexus/content/repositories/adamjak_net_releases/</url>
 		<layout>default</layout>
 	</repository>
 </repositories>
