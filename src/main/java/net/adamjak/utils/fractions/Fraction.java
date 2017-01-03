@@ -749,7 +749,12 @@ public class Fraction extends Number implements Comparable<Fraction>, Cloneable,
 		
 		return a;
 	}
-	
+
+	/**
+	 * Clasic signum method.
+	 * @param a long number for signum
+	 * @return Return 1 if a is positive, return -1 if a is negative and return 0 if a is 0.
+	 */
 	private static int signum(long a)
 	{
 		if (a > 0)

@@ -32,11 +32,11 @@ Maven
 		<releases>
 			<enabled>true</enabled>
 			<updatePolicy>always</updatePolicy>
-			<checksumPolicy>fail</checksumPolicy>
+            <checksumPolicy>fail</checksumPolicy>
 		</releases>
 		<id>Fractions</id>
 		<name>Tomas Adamjak</name>
-		<url>http://utils.adamjak.net/maven2</url>
+		<url>http://repo.adamjak.net/nexus/content/groups/public/</url>
 		<layout>default</layout>
 	</repository>
 </repositories>
@@ -44,7 +44,7 @@ Maven
 <dependency>
 	<groupId>net.adamjak.utils</groupId>
 	<artifactId>Fractions</artifactId>
-	<version>0.6.1</version>
+	<version>0.6.2</version>
 </dependency>
 ```
 
