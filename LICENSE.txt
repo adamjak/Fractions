@@ -1,4 +1,4 @@
-Copyright (c) 2016, Tomáš Adamják
+Copyright (c) 2016 - 2017, Tomáš Adamják
 
 All rights reserved.
 
