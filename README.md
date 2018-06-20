@@ -42,9 +42,9 @@ Maven
 </repositories>
 
 <dependency>
-	<groupId>net.adamjak.utils</groupId>
+	<groupId>net.adamjak.math</groupId>
 	<artifactId>Fractions</artifactId>
-	<version>0.6.2</version>
+	<version>0.6.4</version>
 </dependency>
 ```
 

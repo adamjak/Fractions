@@ -2,7 +2,7 @@
  * Copyright 2015 Tomas Adamjak - http://thomas.adamjak.net 
  * License: The BSD 3-Clause License
  */
-package net.adamjak.utils.fractions;
+package net.adamjak.math.fractions;
 
 import org.junit.Test;
 

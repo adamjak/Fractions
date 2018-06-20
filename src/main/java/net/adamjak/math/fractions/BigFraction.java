@@ -2,7 +2,7 @@
  * Copyright 2016, Tomas Adamjak
  * License: The BSD 3-Clause License
  */
-package net.adamjak.utils.fractions;
+package net.adamjak.math.fractions;
 
 import java.io.Serializable;
 import java.math.BigInteger;

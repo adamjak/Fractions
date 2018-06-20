@@ -1,4 +1,4 @@
-package net.adamjak.utils.fractions;
+package net.adamjak.math.fractions;
 
 import org.junit.Test;
 
